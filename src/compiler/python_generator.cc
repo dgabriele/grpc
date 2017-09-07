@@ -400,7 +400,7 @@ bool PrivateGenerator::PrintStub(
   StringMap dict;
   dict["Service"] = service->name();
   out->Print("\n\n");
-  out->Print(dict, "class $Service$Stub(object):\n");
+  out->Print(dict, "class $Service$Stub(base.GeneratedStub):\n");
   {
     IndentScope raii_class_indent(out);
     StringVector service_comments = service->GetAllComments();
@@ -466,7 +466,7 @@ bool PrivateGenerator::PrintServicer(const grpc_generator::Service* service,
   StringMap service_dict;
   service_dict["Service"] = service->name();
   out->Print("\n\n");
-  out->Print(service_dict, "class $Service$Servicer(object):\n");
+  out->Print(service_dict, "class $Service$Servicer(base.GeneratedServicer):\n");
   {
     IndentScope raii_class_indent(out);
     StringVector service_comments = service->GetAllComments();
@@ -619,6 +619,7 @@ bool PrivateGenerator::PrintPreamble(grpc_generator::Printer* out) {
       }
       out->Print(var, "$ImportStatement$ as $ModuleAlias$\n");
     }
+    out->Print(var, "from $Package$.framework.interfaces.base import base\n");
   }
   return true;
 }

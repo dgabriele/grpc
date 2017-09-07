@@ -328,3 +328,13 @@ class End(six.with_metaclass(abc.ABCMeta)):
       action: A callable that accepts no arguments.
     """
         raise NotImplementedError()
+
+
+class GeneratedStub(object):
+    """Common type for grpc-generated Stub classes.
+    """
+
+
+class GeneratedServicer(object):
+    """Common type for grpc-generated Servicer classes.
+    """
